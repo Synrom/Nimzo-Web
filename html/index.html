@@ -1,1 +1,839 @@
-<h1> Hello, World! </h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nimzo - Master Chess Openings</title>
+    <style>
+        :root {
+            --background-color: hsl(0 0% 98%);
+            --section-background-color: hsl(0 0% 100%);
+            --dark-square-background-color: #c19a6d;
+            --white-square-background-color: #fae9d7;
+            --red: #ff4b4c;
+            --dark-red: #cc3c3c;
+            --super-light-red: #ffc8c9;
+            --yellow: #ffc801;
+            --light-yellow: #fbe56d;
+            --brown: #aa572b;
+            --light-brown: #cd7800;
+            --super-light-blue: #ddf3fe;
+            --blue: #84d7fe;
+            --lila: #a570ff;
+            --dark-lila: #995fff;
+            --light-lila: #ae7cff;
+            --super-light-lila: #ce82ff;
+            --cyan: #4eddff;
+            --drak-cyan: #37b7ff;
+            --light-grey: #e5e5e5;
+            --grey: #d2d2d2;
+            --dark-grey: #acaaab;
+            --super-dark-grey: #959595;
+            --orange: #ff9500;
+            --dark-orange: #c25800;
+            --light-orange: #feb100;
+            --headline-text-color: #4b4b4b;
+            --button-blue: hsl(213, 72.28%, 66.09%);
+            --button-shadow-blue: hsl(213, 44.8%, 54.71%);
+            --green: hsl(130, 54.55%, 56%);
+            --darkGreen: hsl(130, 42.86%, 45.5%);
+            --lightGreen: hsl(130, 72.97%, 63%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: var(--background-color);
+            color: var(--headline-text-color);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background-color: var(--section-background-color);
+            padding: 20px 0;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 32px;
+            font-weight: bold;
+            color: var(--lila);
+        }
+
+        .nav-links a {
+            margin-left: 30px;
+            text-decoration: none;
+            color: var(--headline-text-color);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--lila);
+        }
+
+        .hero {
+            padding: 100px 0;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 56px;
+            font-weight: 800;
+            margin-bottom: 20px;
+            color: var(--headline-text-color);
+        }
+
+        .hero .highlight {
+            color: var(--lila);
+        }
+
+        .hero p {
+            font-size: 24px;
+            color: var(--super-dark-grey);
+            margin-bottom: 40px;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 16px 40px;
+            background: var(--button-blue);
+            color: white;
+            text-decoration: none;
+            border-radius: 12px;
+            font-size: 18px;
+            font-weight: 600;
+            box-shadow: 0 4px 0 var(--button-shadow-blue);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 0 var(--button-shadow-blue);
+        }
+
+        .cta-button:active {
+            transform: translateY(2px);
+            box-shadow: 0 2px 0 var(--button-shadow-blue);
+        }
+
+        .features {
+            padding: 80px 0;
+            background-color: var(--section-background-color);
+        }
+
+        .features h2 {
+            text-align: center;
+            font-size: 42px;
+            margin-bottom: 60px;
+            color: var(--headline-text-color);
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+
+        .feature-card {
+            background: var(--background-color);
+            padding: 40px;
+            border-radius: 16px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature-icon {
+            width: 64px;
+            height: 64px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            margin-bottom: 20px;
+        }
+
+        .feature-card:nth-child(1) .feature-icon {
+            background: linear-gradient(135deg, var(--super-light-lila), var(--lila));
+        }
+
+        .feature-card:nth-child(2) .feature-icon {
+            background: linear-gradient(135deg, var(--light-yellow), var(--yellow));
+        }
+
+        .feature-card:nth-child(3) .feature-icon {
+            background: linear-gradient(135deg, var(--blue), var(--cyan));
+        }
+
+        .feature-card h3 {
+            font-size: 24px;
+            margin-bottom: 12px;
+            color: var(--headline-text-color);
+        }
+
+        .feature-card p {
+            color: var(--super-dark-grey);
+            font-size: 16px;
+        }
+
+        .chessboard-demo {
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .chessboard-demo h2 {
+            font-size: 42px;
+            margin-bottom: 20px;
+            color: var(--headline-text-color);
+        }
+
+        .chessboard-demo p {
+            font-size: 18px;
+            color: var(--super-dark-grey);
+            margin-bottom: 40px;
+        }
+
+        .demo-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .board-wrapper {
+            position: relative;
+        }
+
+        .board-container {
+            display: inline-block;
+            border: 4px solid var(--dark-grey);
+            border-radius: 14px;
+            overflow: hidden;
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+            position: relative;
+        }
+
+        .chessboard {
+            display: grid;
+            grid-template-columns: repeat(8, 60px);
+            grid-template-rows: repeat(8, 60px);
+            position: relative;
+        }
+
+        .square {
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            transition: background-color 0.3s;
+        }
+
+        .piece-img {
+            width: 85%;
+            height: 85%;
+            position: absolute;
+            pointer-events: none;
+            transition: transform 0.2s ease-out;
+            z-index: 10;
+        }
+
+        .piece-img.animating {
+            transition: transform 0.2s ease-out;
+        }
+
+        .square.light {
+            background-color: var(--white-square-background-color);
+        }
+
+        .square.dark {
+            background-color: var(--dark-square-background-color);
+        }
+
+        .square.light.last-move {
+            background-color: #f0d89e;
+        }
+
+        .square.dark.last-move {
+            background-color: #b5925e;
+        }
+
+        .square.row-1.col-0 {
+            border-top-left-radius: 10px;
+        }
+
+        .square.row-1.col-7 {
+            border-top-right-radius: 10px;
+        }
+
+        .square.row-8.col-0 {
+            border-bottom-left-radius: 10px;
+        }
+
+        .square.row-8.col-7 {
+            border-bottom-right-radius: 10px;
+        }
+
+        .arrow-layer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 100;
+        }
+
+        .move-log {
+            background: var(--section-background-color);
+            padding: 16px 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            max-width: 480px;
+            width: 100%;
+        }
+
+        .move-log-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--headline-text-color);
+            margin-bottom: 12px;
+        }
+
+        .moves-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .move-item {
+            padding: 4px 8px;
+            cursor: pointer;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 15px;
+            transition: background-color 0.2s;
+        }
+
+        .move-item:hover {
+            background-color: var(--light-grey);
+        }
+
+        .move-item.active {
+            color: #000;
+        }
+
+        .move-item.inactive {
+            color: var(--super-dark-grey);
+        }
+
+        .controls {
+            display: flex;
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        .control-button {
+            padding: 10px 20px;
+            background: var(--button-blue);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 2px 0 var(--button-shadow-blue);
+            transition: transform 0.1s, box-shadow 0.1s;
+        }
+
+        .control-button:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 3px 0 var(--button-shadow-blue);
+        }
+
+        .control-button:active {
+            transform: translateY(1px);
+            box-shadow: 0 1px 0 var(--button-shadow-blue);
+        }
+
+        .community {
+            padding: 80px 0;
+            background: linear-gradient(135deg, var(--super-light-blue), var(--super-light-lila));
+        }
+
+        .community h2 {
+            text-align: center;
+            font-size: 42px;
+            margin-bottom: 20px;
+            color: var(--headline-text-color);
+        }
+
+        .community p {
+            text-align: center;
+            font-size: 20px;
+            color: var(--headline-text-color);
+            margin-bottom: 40px;
+        }
+
+        .deck-examples {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .deck-card {
+            background: var(--section-background-color);
+            padding: 24px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        .deck-card h4 {
+            font-size: 18px;
+            margin-bottom: 8px;
+            color: var(--headline-text-color);
+        }
+
+        .deck-card .stats {
+            color: var(--super-dark-grey);
+            font-size: 14px;
+        }
+
+        footer {
+            background-color: var(--section-background-color);
+            padding: 40px 0;
+            text-align: center;
+            color: var(--super-dark-grey);
+        }
+
+            @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 36px;
+            }
+
+            .hero p {
+                font-size: 18px;
+            }
+
+            .chessboard {
+                grid-template-columns: repeat(8, 45px);
+                grid-template-rows: repeat(8, 45px);
+            }
+
+            .square {
+                width: 45px;
+                height: 45px;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .move-log {
+                max-width: 360px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .chessboard {
+                grid-template-columns: repeat(8, 38px);
+                grid-template-rows: repeat(8, 38px);
+            }
+
+            .square {
+                width: 38px;
+                height: 38px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <div class="logo">♘ Nimzo</div>
+            <div class="nav-links">
+                <a href="#features">Features</a>
+                <a href="#demo">Demo</a>
+                <a href="#community">Community</a>
+                <a href="#download">Download</a>
+            </div>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h1>Master Chess Openings with <span class="highlight">Nimzo</span></h1>
+            <p>Spaced repetition flashcards designed for chess players</p>
+            <a href="#download" class="cta-button">Download for iPhone</a>
+        </div>
+    </section>
+
+    <section class="features" id="features">
+        <div class="container">
+            <h2>Everything You Need to Learn Openings</h2>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <h3>Spaced Repetition</h3>
+                    <p>Learn efficiently with proven spaced repetition algorithms, just like Anki. Review opening lines at optimal intervals to maximize retention.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📚</div>
+                    <h3>Custom Decks</h3>
+                    <p>Create your own decks and add your favorite opening lines. Organize your repertoire exactly how you want it.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🌍</div>
+                    <h3>Community Decks</h3>
+                    <p>Access thousands of decks published by other players. Find decks for every opening, from beginner to grandmaster level.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="chessboard-demo" id="demo">
+        <div class="container">
+            <h2>Study Opening Lines Visually</h2>
+            <p>Follow along with arrows and move-by-move navigation</p>
+            <div class="demo-container">
+                <div class="board-wrapper">
+                    <div class="board-container">
+                        <div class="chessboard" id="board"></div>
+                        <svg class="arrow-layer" id="arrow-layer"></svg>
+                    </div>
+                </div>
+                <div class="move-log">
+                    <div class="move-log-title">Sicilian Defense - Najdorf Variation</div>
+                    <div class="moves-container" id="moves-container"></div>
+                    <div class="controls">
+                        <button class="control-button" id="prev-btn">← Previous</button>
+                        <button class="control-button" id="next-btn">Next →</button>
+                        <button class="control-button" id="reset-btn">Reset</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="community" id="community">
+        <div class="container">
+            <h2>Join the Community</h2>
+            <p>Explore popular decks shared by chess enthusiasts worldwide</p>
+            <div class="deck-examples">
+                <div class="deck-card">
+                    <h4>Sicilian Defense Complete</h4>
+                    <p class="stats"></p>
+                </div>
+                <div class="deck-card">
+                    <h4>French Defense Repertoire</h4>
+                    <p class="stats"></p>
+                </div>
+                <div class="deck-card">
+                    <h4>King's Indian Attack</h4>
+                    <p class="stats"></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Nimzo. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Chess piece images (Wikipedia SVG pieces)
+        const pieceImages = {
+            'wK': './assets/wk.png',
+            'wQ': './assets/wq.png',
+            'wR': './assets/wr.png',
+            'wB': './assets/wb.png',
+            'wN': './assets/wn.png',
+            'wP': './assets/wp.png',
+            'bK': './assets/bk.png',
+            'bQ': './assets/bq.png',
+            'bR': './assets/br.png',
+            'bB': './assets/bb.png',
+            'bN': './assets/bn.png',
+            'bP': './assets/bp.png'
+        };
+
+        // Starting position
+        const startingPosition = [
+            ['bR', 'bN', 'bB', 'bQ', 'bK', 'bB', 'bN', 'bR'],
+            ['bP', 'bP', 'bP', 'bP', 'bP', 'bP', 'bP', 'bP'],
+            ['', '', '', '', '', '', '', ''],
+            ['', '', '', '', '', '', '', ''],
+            ['', '', '', '', '', '', '', ''],
+            ['', '', '', '', '', '', '', ''],
+            ['wP', 'wP', 'wP', 'wP', 'wP', 'wP', 'wP', 'wP'],
+            ['wR', 'wN', 'wB', 'wQ', 'wK', 'wB', 'wN', 'wR']
+        ];
+
+        // Sample opening line (Sicilian Najdorf)
+        const openingLine = [
+            { from: [6, 4], to: [4, 4], san: 'e4' },      // e2-e4
+            { from: [1, 2], to: [3, 2], san: 'c5' },      // c7-c5
+            { from: [7, 6], to: [5, 5], san: 'Nf3' },     // Ng1-f3
+            { from: [1, 3], to: [3, 3], san: 'd6' },      // d7-d6
+            { from: [6, 3], to: [4, 3], san: 'd4' },      // d2-d4
+            { from: [3, 2], to: [4, 3], san: 'cxd4' },    // c5xd4
+            { from: [5, 5], to: [4, 3], san: 'Nxd4' },    // Nf3xd4
+            { from: [0, 6], to: [2, 5], san: 'Nf6' },     // Ng8-f6
+            { from: [7, 1], to: [5, 2], san: 'Nc3' },     // Nb1-c3
+            { from: [1, 0], to: [3, 0], san: 'a6' }       // a7-a6
+        ];
+
+        let currentPosition = 0;
+        let boardState = JSON.parse(JSON.stringify(startingPosition));
+
+        function createBoard() {
+            const board = document.getElementById('board');
+            board.innerHTML = '';
+            
+            for (let row = 0; row < 8; row++) {
+                for (let col = 0; col < 8; col++) {
+                    const square = document.createElement('div');
+                    square.className = 'square';
+                    square.classList.add((row + col) % 2 === 0 ? 'light' : 'dark');
+                    square.classList.add(`row-${row + 1}`);
+                    square.classList.add(`col-${col}`);
+                    square.dataset.row = row;
+                    square.dataset.col = col;
+                    
+                    const piece = boardState[row][col];
+                    if (piece) {
+                        const img = document.createElement('img');
+                        img.src = pieceImages[piece];
+                        img.className = 'piece-img';
+                        img.alt = piece;
+                        square.appendChild(img);
+                    }
+                    
+                    board.appendChild(square);
+                }
+            }
+        }
+
+        function highlightLastMove() {
+            document.querySelectorAll('.square').forEach(sq => {
+                sq.classList.remove('last-move');
+            });
+            
+            if (currentPosition > 0) {
+                const lastMove = openingLine[currentPosition - 1];
+                const fromSquare = document.querySelector(`[data-row="${lastMove.from[0]}"][data-col="${lastMove.from[1]}"]`);
+                const toSquare = document.querySelector(`[data-row="${lastMove.to[0]}"][data-col="${lastMove.to[1]}"]`);
+                
+                if (fromSquare) fromSquare.classList.add('last-move');
+                if (toSquare) toSquare.classList.add('last-move');
+            }
+        }
+
+        function drawArrow() {
+            const svg = document.getElementById('arrow-layer');
+            svg.innerHTML = '';
+            
+            if (currentPosition > 0) {
+                const move = openingLine[currentPosition - 1];
+                const fieldSize = 60;
+                
+                let [startRow, startCol] = move.from;
+                let [endRow, endCol] = move.to;
+                
+                let startX = startCol * fieldSize + fieldSize / 2;
+                let startY = startRow * fieldSize + fieldSize / 2;
+                let endX = endCol * fieldSize + fieldSize / 2;
+                let endY = endRow * fieldSize + fieldSize / 2;
+                
+                // Arrow path
+                const defs = document.createElementNS('http://www.w3.org/2000/svg', 'defs');
+                const marker = document.createElementNS('http://www.w3.org/2000/svg', 'marker');
+                marker.setAttribute('id', 'arrowhead');
+                marker.setAttribute('markerWidth', '10');
+                marker.setAttribute('markerHeight', '10');
+                marker.setAttribute('refX', '5');
+                marker.setAttribute('refY', '5');
+                marker.setAttribute('orient', 'auto');
+                
+                const polygon = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
+                polygon.setAttribute('points', '0,0 10,5 0,10');
+                polygon.setAttribute('fill', 'hsl(213, 72.28%, 66.09%)');
+                polygon.setAttribute('opacity', '0.6');
+                
+                marker.appendChild(polygon);
+                defs.appendChild(marker);
+                svg.appendChild(defs);
+                
+                const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+                path.setAttribute('d', `M ${startX} ${startY} L ${endX} ${endY}`);
+                path.setAttribute('stroke', 'hsl(213, 72.28%, 66.09%)');
+                path.setAttribute('stroke-width', '4');
+                path.setAttribute('fill', 'none');
+                path.setAttribute('opacity', '0.6');
+                path.setAttribute('marker-end', 'url(#arrowhead)');
+                
+                svg.appendChild(path);
+            }
+        }
+
+        function updateMoveLog() {
+            const container = document.getElementById('moves-container');
+            container.innerHTML = '';
+            
+            openingLine.forEach((move, index) => {
+                const moveItem = document.createElement('div');
+                moveItem.className = 'move-item';
+                moveItem.classList.add(index === currentPosition - 1 ? 'active' : 'inactive');
+                
+                const moveNumber = Math.floor(index / 2) + 1;
+                const isWhiteMove = index % 2 === 0;
+                const text = isWhiteMove ? `${moveNumber}.${move.san}` : move.san;
+                
+                moveItem.textContent = text;
+                moveItem.onclick = () => goToPosition(index + 1);
+                
+                container.appendChild(moveItem);
+            });
+        }
+
+        function goToPosition(position) {
+            boardState = JSON.parse(JSON.stringify(startingPosition));
+            
+            for (let i = 0; i < position; i++) {
+                const move = openingLine[i];
+                const piece = boardState[move.from[0]][move.from[1]];
+                boardState[move.from[0]][move.from[1]] = '';
+                boardState[move.to[0]][move.to[1]] = piece;
+            }
+            
+            currentPosition = position;
+            
+            // Animate the piece movement
+            if (position > 0 && position <= openingLine.length) {
+                const move = openingLine[position - 1];
+                const fromSquare = document.querySelector(`[data-row="${move.from[0]}"][data-col="${move.from[1]}"]`);
+                const toSquare = document.querySelector(`[data-row="${move.to[0]}"][data-col="${move.to[1]}"]`);
+                
+                if (fromSquare && toSquare) {
+                    const pieceImg = fromSquare.querySelector('.piece-img');
+                    if (pieceImg) {
+                        const fromRect = fromSquare.getBoundingClientRect();
+                        const toRect = toSquare.getBoundingClientRect();
+                        const deltaX = toRect.left - fromRect.left;
+                        const deltaY = toRect.top - fromRect.top;
+                        
+                        pieceImg.style.transform = `translate(${deltaX}px, ${deltaY}px)`;
+                        pieceImg.classList.add('animating');
+                        
+                        setTimeout(() => {
+                            createBoard();
+                            highlightLastMove();
+                            drawArrow();
+                        }, 200);
+                    } else {
+                        createBoard();
+                        highlightLastMove();
+                        drawArrow();
+                    }
+                } else {
+                    createBoard();
+                    highlightLastMove();
+                    drawArrow();
+                }
+            } else {
+                createBoard();
+                highlightLastMove();
+                drawArrow();
+            }
+            
+            updateMoveLog();
+        }
+
+        function nextMove() {
+            if (currentPosition < openingLine.length) {
+                goToPosition(currentPosition + 1);
+            }
+        }
+
+        function prevMove() {
+            if (currentPosition > 0) {
+                goToPosition(currentPosition - 1);
+            }
+        }
+
+        function reset() {
+            goToPosition(0);
+        }
+
+        // Event listeners
+        document.getElementById('next-btn').addEventListener('click', nextMove);
+        document.getElementById('prev-btn').addEventListener('click', prevMove);
+        document.getElementById('reset-btn').addEventListener('click', reset);
+
+        // Keyboard controls
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight') nextMove();
+            if (e.key === 'ArrowLeft') prevMove();
+            if (e.key === 'Home') reset();
+        });
+
+        // Initialize
+        createBoard();
+        updateMoveLog();
+
+        // Auto-play demo
+        let autoPlayInterval;
+        function startAutoPlay() {
+            autoPlayInterval = setInterval(() => {
+                if (currentPosition < openingLine.length) {
+                    nextMove();
+                } else {
+                    setTimeout(() => {
+                        reset();
+                    }, 2000);
+                }
+            }, 1500);
+        }
+
+        // Start auto-play when section comes into view
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    startAutoPlay();
+                } else {
+                    clearInterval(autoPlayInterval);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        observer.observe(document.querySelector('.chessboard-demo'));
+    </script>
+</body>
+</html>

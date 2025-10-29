@@ -1,0 +1,41 @@
+:root {
+  --background-color: hsl(0 0% 98%);
+  --section-background-color: hsl(0 0% 100%);
+
+  --dark-square-background-color: #c19a6d;
+  --white-square-background-color:  #fae9d7;
+
+
+  --red: #ff4b4c;
+  --dark-red: #cc3c3c;
+  --super-light-red: #ffc8c9;
+  --yellow: #ffc801;
+  --light-yellow: #fbe56d;
+  --brown: #aa572b;
+  --light-brown: #cd7800;
+  --super-light-blue: #ddf3fe;
+  --blue: #84d7fe;
+  --lila: #a570ff;
+  --dark-lila: #995fff;
+  --light-lila: #ae7cff;
+  --super-light-lila: #ce82ff;
+  --cyan: #4eddff;
+  --drak-cyan: #37b7ff;
+  --light-grey: #e5e5e5;
+  --grey: #d2d2d2;
+  --dark-grey: #acaaab;
+  --super-dark-grey: #959595;
+
+  /* Quests */
+  --orange: #ff9500;
+  --dark-orange: #c25800;
+  --light-orange: #feb100;
+  --headline-text-color: #4b4b4b;
+
+  --button-blue: hsl(213, 72.28%, 66.09%);
+  --button-shadow-blue: hsl(213, 44.8%, 54.71%);
+
+  --green: hsl(130, 54.55%, 56%);
+  --darkGreen: hsl(130, 42.86%, 45.5%);
+  --lightGreen: hsl(130, 72.97%, 63%);
+}
